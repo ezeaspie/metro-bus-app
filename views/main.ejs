@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Next Bus Express</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <div class="main-options">
+            <button class="home"></button>
+            <h1>Next Bus</h1>
+        </div>
+        <div class="second-options">
+            <button class="refresh"></button>
+            <button class="locate"></button>
+            <button class="search"></button>
+        </div>
+    </header>
+    <form class="search-form">
+        <input type="text" class="search-input" placeholder="Enter bus stop or route">
+        <input type="submit" class="submit" value="Search">
+    </form>
+
+    <div class="card-list">
+        <div class="card">
+            <div class="top">
+                <h2><%= busData.StopName %></h2>
+                <div class="card-options">
+                    <button class="remove"></button>
+                </div>
+            </div>
+            <ul class="predictions">
+                <% for(let i=0 ; i<busData.Predictions.length; i++) { %>
+                    <li>
+                        <h3>Route <%= busData.Predictions[i].RouteID %></h3>
+                        <h3><%= busData.Predictions[i].DirectionText %></h3>
+                        <h3><%= busData.Predictions[i].Minutes %> Minutes</h3>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+
+    <div id="demo"></div>
+    <form id="coordinates" action="/" method="POST">
+        <input id="latitude" type="number" step="any" name="lat" />
+        <input id="longitude" type="number" step="any" name="lon" />
+        <input type="submit" />
+    </form>
+    <script type="text/javascript" src="/mainScript.js"></script>
+</body>
+</html>

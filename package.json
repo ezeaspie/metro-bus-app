@@ -1,0 +1,17 @@
+{
+  "name": "nextmetrobus",
+  "version": "1.0.0",
+  "description": "A responsive full stack app that gets and displays real-time bus schedules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ezequiel Espinoza",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.9",
+    "express": "^4.16.3",
+    "node-fetch": "^2.1.2"
+  }
+}
