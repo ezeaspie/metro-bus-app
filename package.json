@@ -4,7 +4,7 @@
   "description": "A responsive full stack app that gets and displays real-time bus schedules",
   "main": "index.js",
   "scripts": {
-    "start": "index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ezequiel Espinoza",
