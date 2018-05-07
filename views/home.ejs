@@ -1,8 +1,10 @@
 <html>
+
 <head>
-    <title>Next Bus Express</title>
+    <title>Next Bus Express - Home</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
     <header>
         <div class="main-options">
@@ -22,24 +24,31 @@
 
     <div class="card-list">
         <% for(let p=0 ; p<busData.length ; p++) { %>
-        <div class="card">
-            <div class="top">
-                <h2><%= busData[p].StopName %></h2>
-                <div class="card-options">
-                    <button class="remove"></button>
+            <div class="card" id=card<%= p %>>
+                <div class="top">
+                    <h2>
+                        <%= busData[p].StopName %>
+                    </h2>
+                    <div class="card-options">
+                        <button class="remove" id=<%= p %>></button>
+                    </div>
                 </div>
+                <ul class="predictions">
+                    <% for(let i=0 ; i<busData[p].Predictions.length; i++) { %>
+                        <li>
+                            <h3>Route
+                                <%= busData[p].Predictions[i].RouteID %>
+                            </h3>
+                            <h3>
+                                <%= busData[p].Predictions[i].DirectionText %>
+                            </h3>
+                            <h3>
+                                <span class="time"><%= busData[p].Predictions[i].Minutes %></span> Minutes</h3>
+                        </li>
+                        <% } %>
+                </ul>
             </div>
-            <ul class="predictions">
-                <% for(let i=0 ; i<busData[p].Predictions.length; i++) { %>
-                    <li>
-                        <h3>Route <%= busData[p].Predictions[i].RouteID %></h3>
-                        <h3><%= busData[p].Predictions[i].DirectionText %></h3>
-                        <h3><%= busData[p].Predictions[i].Minutes %> Minutes</h3>
-                    </li>
-                <% } %>
-            </ul>
-        </div>
-        <% } %>
+            <% } %>
     </div>
 
     <div id="demo"></div>
@@ -49,12 +58,8 @@
         <input type="submit" />
     </form>
 
-    <form id="stop-data" action="/" method="POST">
-        <input id="array" type="string" name="userStopArray" />
-        <input type="submit" />
-    </form>
-
     <script src="/localForage-1.7.1/dist/localforage.js"></script>
     <script type="text/javascript" src="/mainScript.js"></script>
 </body>
+
 </html>

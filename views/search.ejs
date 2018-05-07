@@ -1,8 +1,10 @@
 <html>
+
 <head>
-    <title>Next Bus Express</title>
+    <title>Next Bus Express - Search</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
     <header>
         <div class="main-options">
@@ -10,36 +12,40 @@
             <h1>Next Bus</h1>
         </div>
         <div class="second-options">
-            <a href="/"><button class="refresh"></button></a>
             <button class="locate"></button>
             <button class="search"></button>
         </div>
     </header>
     <form class="search-form" action="/usersearch" method="POST">
-        <input type="text" class="search-input" name="searchTerm" placeholder="Enter bus stop or route">
+        <input type="text" class="search-input" name = "searchTerm" placeholder="Enter bus stop or route">
         <input type="submit" class="submit-user" value="Search">
     </form>
 
     <div class="card-list">
-        <% for(let p=0 ; p<busData.length ; p++) { %>
         <div class="card">
             <div class="top">
-                <h2><%= busData[p].StopName %></h2>
-                <div class="card-options">
-                    <button class="remove"></button>
-                </div>
+                <h2>
+                    Bus Stops Near You
+                </h2>
             </div>
             <ul class="predictions">
-                <% for(let i=0 ; i<busData[p].Predictions.length; i++) { %>
+                <% for(let i=0 ; i<stopData.Stops.length; i++) { %>
                     <li>
-                        <h3>Route <%= busData[p].Predictions[i].RouteID %></h3>
-                        <h3><%= busData[p].Predictions[i].DirectionText %></h3>
-                        <h3><%= busData[p].Predictions[i].Minutes %> Minutes</h3>
+                        <h3>
+                            <%= stopData.Stops[i].Name %>
+                        </h3>
+                        <button class="save" id=<%= stopData.Stops[i].StopID %>><span>Save this Stop</span></button>
+                        <ul class="route-list">
+                        <% for(let p=0 ; p<stopData.Stops[i].Routes.length; p++){ %>
+                            <li class="route">
+                                <%= stopData.Stops[i].Routes[p] %>
+                            </li>
+                        <% } %>
+                        </ul>
                     </li>
-                <% } %>
+                    <% } %>
             </ul>
         </div>
-        <% } %>
     </div>
 
     <div id="demo"></div>
@@ -48,13 +54,8 @@
         <input id="longitude" type="number" step="any" name="lon" />
         <input type="submit" />
     </form>
-
-    <form id="stop-data" action="/" method="POST">
-        <input id="array" type="string" name="userStopArray" />
-        <input type="submit" />
-    </form>
-
     <script src="/localForage-1.7.1/dist/localforage.js"></script>
     <script type="text/javascript" src="/mainScript.js"></script>
 </body>
+
 </html>
