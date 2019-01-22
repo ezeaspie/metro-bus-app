@@ -22,34 +22,12 @@
         </form>
     </header>
     
-
-    <div class="card-list">
-        <div class="card">
-            <div class="top">
-                <h2>
-                    Bus Stops Near You
-                </h2>
-            </div>
-            <ul class="predictions search-result">
-                <% for(let i=0 ; i<stopData.Stops.length; i++) { %>
-                    <li>
-                        <h3>
-                            <%= stopData.Stops[i].Name %>
-                        </h3>
-                        <button class="save" id=<%= stopData.Stops[i].StopID %>><span>Save this Stop</span></button>
-                        <ul class="route-list">
-                        <% for(let p=0 ; p<stopData.Stops[i].Routes.length; p++){ %>
-                            <li class="route">
-                                <%= stopData.Stops[i].Routes[p] %>
-                            </li>
-                        <% } %>
-                        </ul>
-                    </li>
-                    <% } %>
-            </ul>
-        </div>
+    <div class="error">
+        <h2>Couldn't find any stops with those search terms. Make sure you entered the correct value of the street name or stop ID and try again.</h2>
+        <h2>Or click <a href="/">here</a> to return to your home page</h2>
+        <img src="MetroBusOnly.png" alt="Flat Design Metro Bus"/>
     </div>
-
+        
     <div id="demo"></div>
     <form id="coordinates" action="/search" method="POST">
         <input id="latitude" type="number" step="any" name="lat" />

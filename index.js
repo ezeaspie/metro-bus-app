@@ -33,7 +33,13 @@ app.post("/search", (req,res) => {
     })
         .then((response) => { return response.json() })
         .then((response) => {
-            res.render('search.ejs', {stopData : response});
+            console.log(response.Stops.length);
+            if(response.Stops.length > 0){
+                res.render('search.ejs', {stopData : response});
+            }
+            else{
+                res.render('searcherror.ejs');
+            }
         });
 });
 
@@ -84,7 +90,12 @@ app.post("/usersearch", (req, res) => {
                     searchResults.push(response.Stops[i]);
                 }
             }
-            res.render('search.ejs', { stopData: {Stops : searchResults} });
+            if(searchResults.length > 0 ){
+                res.render('search.ejs', { stopData: {Stops : searchResults} });
+            }
+            else{
+                res.render('searcherror.ejs');
+            }
         });
 });
 

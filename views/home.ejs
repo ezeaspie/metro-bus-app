@@ -3,25 +3,24 @@
 <head>
     <title>Next Bus Express - Home</title>
     <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald" rel="stylesheet"> 
 </head>
 
 <body>
     <header>
-        <div class="main-options">
-            <a href="/"><button class="home"></button></a>
-            <h1>Next Bus</h1>
-        </div>
+        <nav class="main-options">
+            <a href="/"><img src="MetroBusWithBackground.png"/></a>
+            <h1>Next Bus Express</h1>
+        </nav>
         <div class="second-options">
-            <a href="/"><button class="refresh"></button></a>
-            <button class="locate"></button>
-            <button class="search"></button>
+            <a href="/"><button class="refresh"><img src="refresh.png" alt="refresh-icon"/></button></a>
+            <button class="locate"><img src="locate-crosshair.png" alt="locate-icon"/></button>
         </div>
+        <form class="search-form" action="/usersearch" method="POST">
+            <input type="text" class="search-input" name="searchTerm" placeholder="Enter street name or stop id">
+            <input type="submit" class="submit-user search" value="Search">
+        </form>
     </header>
-    <form class="search-form" action="/usersearch" method="POST">
-        <input type="text" class="search-input" name="searchTerm" placeholder="Enter bus stop or route">
-        <input type="submit" class="submit-user" value="Search">
-    </form>
-
     <div class="card-list">
         <% for(let p=0 ; p<busData.length ; p++) { %>
             <div class="card" id=card<%= p %>>
@@ -30,7 +29,7 @@
                         <%= busData[p].StopName %>
                     </h2>
                     <div class="card-options">
-                        <button class="remove" id=<%= p %>></button>
+                        <button class="remove" id=<%= p %>><img src="trash.png" alt="remove-icon"/></button>
                     </div>
                 </div>
                 <ul class="predictions">
@@ -57,6 +56,8 @@
         <input id="longitude" type="number" step="any" name="lon" />
         <input type="submit" />
     </form>
+
+    <p>Created by Ezequiel Espinoza Diaz. Visit my <a href="https://github.com/ezeaspie">GitHub</a> or view this <a href="https://github.com/ezeaspie/metro-bus-app">project's source code</a>.</p>
 
     <script src="/localForage-1.7.1/dist/localforage.js"></script>
     <script type="text/javascript" src="/mainScript.js"></script>

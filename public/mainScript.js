@@ -5,6 +5,8 @@ let saveButtons = document.querySelectorAll(".save");
 
 
 localforage.getItem("userInfo").then(function(value) {
+    console.log(document.title);
+    console.log(value);
     if (value != null) {
         userPreferences = value;
     }
@@ -21,12 +23,13 @@ localforage.getItem("userInfo").then(function(value) {
         }
         return;
     }
-    if (document.title == "Next Bus Express" && value != [] && value != null) {
+    if (document.title == "Next Bus Express - Home" && value != [] && value != null) {
+        console.log("hi");
         document.getElementById("array").value = JSON.stringify(userPreferences);
         document.getElementById("stop-data").submit();
         return;
     }
-    if (document.title == "Next Bus Express" && value == [] && value != null){
+    if (document.title == "Next Bus Express - Home" && value == [] && value != null){
         getLocation();
         console.log("Getting stops near you...");
         return;
