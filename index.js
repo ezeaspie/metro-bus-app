@@ -85,16 +85,27 @@ app.post("/usersearch", (req, res) => {
         .then((response) => { return response.json() })
         .then((response) => {
             let searchResults = [];
-            for(let i = 0 ; i<response.Stops.length ; i++) {
-                if(response.Stops[i].Name.includes(searchTerm)){
-                    searchResults.push(response.Stops[i]);
-                }
+            let includesAND = searchTerm.includes("+");
+            
+            if(includesAND){
+                let searchTermItems = searchTerm.split(' + ');
+                let results = response.Stops.filter((stop)=>{
+                    return stop.Name.includes(searchTermItems[0]) && stop.Name.includes(searchTermItems[1])
+                })
+                searchResults = results;
             }
-            if(searchResults.length > 0 ){
+            else{
+                let results = response.Stops.filter((stop)=>{
+                    return stop.Name.includes(searchTerm) || stop.StopID === searchTerm;
+                })
+                searchResults = results;
+            }
+
+            if(searchResults.length > 0 ){  
                 res.render('search.ejs', { stopData: {Stops : searchResults} });
             }
             else{
-                res.render('searcherror.ejs');
+                res.render('searcherror.ejs', {searchTerm});
             }
         });
 });

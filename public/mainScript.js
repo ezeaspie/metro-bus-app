@@ -5,7 +5,6 @@ let saveButtons = document.querySelectorAll(".save");
 
 
 localforage.getItem("userInfo").then(function(value) {
-    console.log(document.title);
     console.log(value);
     if (value != null) {
         userPreferences = value;
@@ -14,20 +13,23 @@ localforage.getItem("userInfo").then(function(value) {
         for(let i=0 ; i<saveButtons.length ; i++) {
             if(userPreferences.includes(saveButtons[i].id)) {
                 saveButtons[i].disabled = true;
+                saveButtons[i].classList.add("button-off");
             }
             if(userPreferences.length >= 2) {
                 for(let i = 0 ; i<saveButtons.length ; i++) {
                     saveButtons[i].disabled = true;
+                    saveButtons[i].classList.add("button-off");
                 }
             }
         }
         return;
     }
     if (document.title == "Next Bus Express - Home" && value != [] && value != null) {
-        console.log("hi");
-        document.getElementById("array").value = JSON.stringify(userPreferences);
-        document.getElementById("stop-data").submit();
-        return;
+        if(document.getElementById("array") !== null){
+            document.getElementById("array").value = JSON.stringify(userPreferences);
+            document.getElementById("stop-data").submit();
+            return;
+        }  
     }
     if (document.title == "Next Bus Express - Home" && value == [] && value != null){
         getLocation();
@@ -69,7 +71,11 @@ let removeButtons = document.querySelectorAll(".remove");
 for(let i=0 ; i<removeButtons.length ; i++) {
     removeButtons[i].addEventListener("click", function() {
         let index = Number(this.id);
+        if(userPreferences[index] === undefined){
+            index = 0;
+        }
         userPreferences.splice(index,1);
+        console.log(userPreferences);
         document.querySelector(`#card${i}`).style.display = "none";
         if(userPreferences.length == 0){
             localforage.clear().then(function () {
@@ -90,10 +96,14 @@ for(let i=0 ; i<removeButtons.length ; i++) {
 
 for(let i = 0 ; i<saveButtons.length ; i++) {
     saveButtons[i].addEventListener("click", function() {
+        console.log(this);
         userPreferences.push(this.id);
+        this.disabled = true;
+        saveButtons[i].classList.add("button-off");
         if (userPreferences.length >= 2) {
             for (let i = 0; i < saveButtons.length; i++) {
                 saveButtons[i].disabled = true;
+                saveButtons[i].classList.add("button-off");
             }
         }
         localforage.setItem('userInfo', userPreferences).then(function (value) {
@@ -101,11 +111,6 @@ for(let i = 0 ; i<saveButtons.length ; i++) {
         }).catch(function (err) {
                 console.log(err);
         });
-
-        if (userPreferences.includes(this.id)) {
-            this.disabled = true;
-            return;
-        }
     });
 }
 
@@ -137,6 +142,9 @@ document.querySelector(".search-form").addEventListener("submit", function(e) {
         let res = searchTerm.replace(/street/gi, "ST");
         if(/avenue/gi.test(searchTerm)){
             res = searchTerm.replace(/avenue/gi, "AVE");
+        }
+        if(searchTerm.includes(` AND `)){
+            res = searchTerm.replace(" AND ", " + ");
         }
         document.querySelector(".search-input").value = res;
        document.querySelector(".search-form").submit();

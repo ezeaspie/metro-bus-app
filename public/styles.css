@@ -215,6 +215,7 @@ h1{
 	padding:.5rem;
 	color:#fff;
 	font-size: .8em;
+	transition:ease-in-out .4s all;
 }
 
 #coordinates {
@@ -258,6 +259,16 @@ p{
 .error img{
 	width:70%;
 	margin: -5% 15%;
+}
+
+li .button-off{
+	opacity:.6;
+	background: var(--red);
+	transition:ease-in-out .4s all;
+}
+
+li .button-off:hover{
+	cursor:not-allowed;
 }
 
 @media screen and (min-width:600px) {
