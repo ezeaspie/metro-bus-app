@@ -8,7 +8,7 @@ Next Bus Express can save up to two stops in localstorage for quick reference on
 
 ## Technologies
 
-This app is built using the **Node JS** for the backend. 
+This app is built using **Node JS** for the backend. 
 
 Routing and data handling is done with help from the **Express** framework.
 
