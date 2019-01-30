@@ -5,6 +5,13 @@
 	--red:#c24332;
 	--dark-blue:#2c81ba;
 }
+:root {
+	--main : #354b62;
+	--green : #1bbc9b;
+	--blue : #3598db;
+	--red:#c24332;
+	--dark-blue:#2c81ba;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -82,8 +89,10 @@ button {
 
 h1{
 	font-size:250%;
-	margin: .5em 1.35em;
+	margin: .5em;
 	font-weight:bold;
+	text-align: center;
+	margin-bottom: 1em;
 }
 
 .second-options{
@@ -140,7 +149,7 @@ h1{
 }
 
 .card {
-	width: 90%;
+	width: 100%;
 	max-width:600px;
 	border-radius:5px 5px 0 0;
 	margin-bottom: 2rem;
@@ -278,6 +287,12 @@ li .button-off:hover{
 	
 	header div:first-of-type {
 		margin-bottom:0;
+	}
+}
+
+@media screen and (min-width:600px){
+	.card{
+		width:90%;
 	}
 }
 
